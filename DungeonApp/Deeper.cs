@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DungeonApp
 {
-    class Program
+    class Deeper
     {
         static void Main(string[] args)
         {
@@ -73,7 +74,7 @@ namespace DungeonApp
         }
 
 
-        private static string GetRoom()
+        private static string GetRoom() //TODO change rooms, this is a placeholder
         {
             string[] rooms =
             {
