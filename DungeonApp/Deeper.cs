@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonLibrary;
+using MonsterLibrary;
 
 
 namespace DungeonApp
@@ -16,8 +18,11 @@ namespace DungeonApp
 
             int score = 0;
 
-            //TODO create player object.
-            //TODO create monster object.
+            Weapon spear = new Weapon(1, 8, "Short Spear", 10);
+
+            Player player = new Player("Leroy Jenkins", 70, 5, 40, 40, spear);
+
+            
             //TODO figure out combat, and weither player wins or loses
             //TODO display for Player & Monster Info/Stats
             //TODO log players life
@@ -28,13 +33,36 @@ namespace DungeonApp
             {
                 Console.WriteLine(GetRoom());
 
+                Skeleton s1 = new Skeleton();
+
+                Ghoul g1 = new Ghoul();
+
+                BoneDrake bd1 = new BoneDrake();
+
+                BoneDrake bd2 = new BoneDrake("Steel Bone Drake", 30, 30, 60, 20, 3, 10, "Like the other Bone Drakes, but it's bones are infused with metal.", true);
+
+                Shadow sd1 = new Shadow();
+
+                Shadow sd2 = new Shadow("???", 25, 25, 75, 30, 2, 9, "Every cell of your body says to run.", true);
+
+                Monster[] monsters = { s1, s1, s1, s1, s1, g1, g1, g1, g1, g1, bd1, bd1, bd2, sd1, sd2 };
+
+                Random rand = new Random();
+
+                int randomNbr = rand.Next(monsters.Length);
+
+                Monster monster = monsters[randomNbr];
+
+                Console.WriteLine("\nIn this rom you encounter a " + monster.Name);
+
+                    
                 bool reload = false;
 
                 do
                 {
                     #region Menu
                     Console.WriteLine("What will you do?\n" +
-                        "P) Push on\n" +
+                        "P) Player Info\n" +
                         "I) Info\n" +
                         "A) Attack\n" +
                         "R) Run Away\n" +
@@ -47,13 +75,32 @@ namespace DungeonApp
                     switch (userChoice)
                     {       //Movement
                         case ConsoleKey.P:
+                            Console.WriteLine("Player Info");
+
+                            Console.WriteLine(player);
+
+                            Console.WriteLine("Monsters Defeated" + score);
                             break;
                         case ConsoleKey.I:
+                            Console.WriteLine("Monster Info");
+
+                            Console.WriteLine(monster);
                             break;
                         case ConsoleKey.A:
+                            Combat.DoBattle(player, monster);
+
+                            if (monster.Life <= 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("\nYou killed {0}!\n", monster.Name);
+                                reload = true;
+                              
+                                score++;
+                            }
                             break;
                         case ConsoleKey.R:
                             Console.WriteLine("There is nowhere to run...");
+                            reload = true;
                             break;
                         case ConsoleKey.X:
                         case ConsoleKey.E:
@@ -78,14 +125,14 @@ namespace DungeonApp
         {
             string[] rooms =
             {
-                "You enter a gaudy pink poweder room, and are instantly covered in glitter.",
+                "You enter plain stone room",
                 "The room is dark and musty with the smell of lost souls.",
-                "You arrive in a room filled with chairs and a ticket stub machine... the dreaded DMV.",
+                "You arrive in a room filled with chairs all aranged in a half circle above you, like someone is watching you.",
                 "You enter a quest library... silience... nothing bul silence...",
-                "As you enter the room, you realize you are standing on a platform surrounded by sharks.",
-                "Oh my... What is that smell? You appear to be standing in a combost pile... ARe those Bones?",
-                "You enter a dark room and all you can hear is hair metal mustic blaring.... This is gonna be bad.",
-                "The room looks just like the rooom you are sitting in right now... or does it?"
+                "As you enter the room, you hear a loud screech from behind you.",
+                "Oh... What is that sound? It sounds like... Crunching?",
+                "When you enter a chill runs up your spine, you hear a weak whisper from behind you '...r..un...'",
+                "The room seems to extend endlessly, the further you push the longer the it seems to get."
                 };
 
             Random rand = new Random();
