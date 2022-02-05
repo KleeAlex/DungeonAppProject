@@ -18,9 +18,9 @@ namespace DungeonApp
 
             int score = 0;
 
-            Weapon spear = new Weapon(1, 8, "Short Spear", 10);
+            Weapon spear = new Weapon(1, 9, "Short Spear", 10);
 
-            Player player = new Player("Leroy Jenkins", 70, 5, 40, 40, spear);
+            Player player = new Player("E-----l", 60, 5, 40, 40, spear);
 
             
             //TODO figure out combat, and weither player wins or loses
@@ -53,7 +53,7 @@ namespace DungeonApp
 
                 Monster monster = monsters[randomNbr];
 
-                Console.WriteLine("\nIn this rom you encounter a " + monster.Name);
+                Console.WriteLine("\nIn this room you encounter a " + monster.Name);
 
                     
                 bool reload = false;

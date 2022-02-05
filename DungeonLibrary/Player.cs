@@ -8,8 +8,8 @@ namespace DungeonLibrary
 {
     public sealed class Player : Character
     {
-        private int _life;
-        
+        private int life;
+
         public Weapon EquippedWeapon { get; set; }
 
         public Player(string name, int hitChance, int block, int life, int maxLife,
@@ -35,14 +35,23 @@ namespace DungeonLibrary
                 "Weapon:\n{4}\nBlock: {5}\nDescription: {6}",
                 Name,
                 Life,
-                MaxLife,
-                Hitchance,
+                MaxLife,              
                 EquippedWeapon,
                 Block,
                 description);
+        }
+        public override int CalcDamage()
+        {
+            Random rand = new Random();
 
+            int damage = rand.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1);
 
+            return damage;
+        }
 
-
+        public override int CalcHitChance()
+        {
+            return base.CalcHitChance() + EquippedWeapon.BonusHitChance;
         }
     }
+}
