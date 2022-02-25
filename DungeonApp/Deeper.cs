@@ -79,7 +79,7 @@ namespace DungeonApp
 
                             Console.WriteLine(player);
 
-                            Console.WriteLine("Monsters Defeated" + score);
+                            Console.WriteLine("Monsters Defeated: " + score);
                             break;
                         case ConsoleKey.I:
                             Console.WriteLine("Monster Info");
